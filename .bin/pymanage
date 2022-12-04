@@ -1,0 +1,9 @@
+#!/bin/bash
+arguments=()
+
+for var in "$@"
+do
+    arguments+=("${var}")
+done
+
+python3 ./kortex/manage.py ${arguments[@]}

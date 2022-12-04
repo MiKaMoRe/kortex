@@ -1,0 +1,5 @@
+{
+	"ignore": "H021,H006,H017",
+	"blank_line_after_tag": "load,extends,include,endblock,endfor,endif",
+	"blank_line_before_tag": "load,extends,include,block,for,if"
+}
