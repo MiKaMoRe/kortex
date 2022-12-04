@@ -7,8 +7,8 @@
     - Create python virtual enviroment by command: `python3 -m venv venv`
     - Move all scripts in `.bin` directory to `/venv/bin`
     - Execute `source venv/bin/activate`
-Now u can use `pymanage {command}` command instead `python3 manage.py {command}`
 
+Now u can use `pymanage {command}` command instead `python3 manage.py {command}`
 - Install requirements by command: `pip install -r requirements.txt`
 
 ## Description
