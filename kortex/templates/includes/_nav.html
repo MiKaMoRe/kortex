@@ -1,0 +1,33 @@
+{% load static %}
+
+<div class="row container-fluid">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <h3>KORTEX</h3>
+      <button class="btn navbar-toggler"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasLeft">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+</div>
+<div class="offcanvas offcanvas-start bg-dark"
+     tabindex="-1"
+     id="offcanvasLeft"
+     aria-labelledby="offcanvasLeftLabel">
+  <div class="offcanvas-header">
+    <h5 id="offcanvasLeftLabel">KORTEX</h5>
+    <button type="button"
+            class="btn-close text-reset btn-close-white"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close">
+    </button>
+  </div>
+  <div class="offcanvas-body">
+
+    {% include "includes/_nav_list.html" %}
+
+  </div>
+</div>

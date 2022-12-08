@@ -4,6 +4,7 @@ venv/
 .env
 kortex/static
 kortex/media
+node_modules
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

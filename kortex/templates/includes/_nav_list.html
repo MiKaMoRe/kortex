@@ -1,0 +1,25 @@
+<ul class="nav-list">
+  {% if user.is_authenticated %}
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'profile' user.slug %}">
+        <h5>Profile</h5>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="{% url "logout" %}" class="nav-link">
+        <h5>logout</h5>
+      </a>
+    </li>
+  {% else %}
+    <li class="nav-item">
+      <a href="{% url "sign_in" %}" class="nav-link">
+        <h5>Sign in</h5>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="{% url "sign_up" %}" class="nav-link">
+        <h5>Sign up</h5>
+      </a>
+    </li>
+  {% endif %}
+</ul>
