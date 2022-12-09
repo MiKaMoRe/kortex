@@ -20,11 +20,17 @@ class UserSignUpForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ("email", "password1", "password2")
+        fields = ("email", "password1", "password2", "first_name", "last_name")
         widgets = {
             "email": forms.EmailInput(
                 attrs={"class": "form-control", "placeholder": "example@test.com"}
-            )
+            ),
+            "first_name": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "John"}
+            ),
+            "last_name": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Johnson"}
+            ),
         }
 
 

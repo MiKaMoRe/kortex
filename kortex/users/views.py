@@ -11,7 +11,9 @@ class SignUp(CreateView):
     model = User
     form_class = UserSignUpForm
     template_name = "users/sign_up.html"
-    success_url = reverse_lazy("root")
+
+    def success_url(self, slug):
+        return reverse_lazy("profile", kwargs={"slug": slug})
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -24,7 +26,7 @@ class SignUp(CreateView):
         password = self.request.POST["password1"]
         user = authenticate(email=email, password=password)
         login(self.request, user)
-        return redirect(self.success_url)
+        return redirect(self.success_url(user.slug))
 
 
 class SignIn(LoginView):

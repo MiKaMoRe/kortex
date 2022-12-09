@@ -19,24 +19,40 @@
 
       {{ form.non_field_errors }}
       <div class="mb-3">
+        <label for="{{ form.first_name.id_for_label }}" class="form-label">First name</label>
+        <div class="align-middle">
+          {{ form.first_name }}
+          {{ form.first_name.errors }}
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="{{ form.last_name.id_for_label }}" class="form-label">Last name</label>
+        <div class="align-middle">
+          {{ form.last_name }}
+          {{ form.last_name.errors }}
+        </div>
+      </div>
+      <div class="mb-3">
         <label for="{{ form.email.id_for_label }}" class="form-label">Email</label>
         <div class="align-middle">
           {{ form.email }}
           {{ form.email.errors }}
         </div>
       </div>
-      <div class="mb-3">
-        <label for="{{ form.password1.id_for_label }}" class="form-label">Password</label>
-        <div class="align-middle">
-          {{ form.password1 }}
-          {{ form.password1.errors }}
+      <div class="row">
+        <div class="mb-3 col-md-6">
+          <label for="{{ form.password1.id_for_label }}" class="form-label">Password</label>
+          <div class="align-middle">
+            {{ form.password1 }}
+            {{ form.password1.errors }}
+          </div>
         </div>
-      </div>
-      <div class="mb-3">
-        <label for="{{ form.password2.id_for_label }}" class="form-label">Password confirmation</label>
-        <div class="align-middle">
-          {{ form.password2 }}
-          {{ form.password2.errors }}
+        <div class="mb-3 col-md-6">
+          <label for="{{ form.password2.id_for_label }}" class="form-label">Password confirmation</label>
+          <div class="align-middle">
+            {{ form.password2 }}
+            {{ form.password2.errors }}
+          </div>
         </div>
       </div>
       <div class="mb-3 form-check">
