@@ -12,6 +12,7 @@ Now u can use `pymanage {command}` command instead `python3 manage.py {command}`
 - Install requirements by command: `pip install -r requirements.txt`
 
 ## Description
+This is my education project. At this moment we are able to sign in and sign up
 
 ## Possible errors
 ### Ubuntu 22.04
