@@ -51,11 +51,6 @@ class User(AbstractUser):
         upload_to="profile_pictures",
         max_length=500,
     )
-    profile_banner = models.ImageField(
-        blank=True,
-        upload_to="profile_banners",
-        max_length=500,
-    )
     slug = models.SlugField(
         ("custom id"),
         max_length=255,
