@@ -27,16 +27,18 @@
   </head>
   <body class="bg-dark">
     {% include "includes/_nav.html" %}
-    <div class="container-fluid main row">
-      <div class="sidebar col-lg-3 col-0 col-xl-2">
-        {% include "includes/_sidebar.html" %}
-      </div>
-      <div class="content col-lg-9 col-12 col-xl-10">
-
-        {% block content %}
-          CONTENT
-        {% endblock content %}
-
+    <div class="container-fluid main">
+      <div class="row">
+        <div class="sidebar col-lg-3 col-0 col-xl-2">
+          {% include "includes/_sidebar.html" %}
+        </div>
+        <div class="content col-lg-9 col-12 col-xl-10">
+  
+          {% block content %}
+            CONTENT
+          {% endblock content %}
+  
+        </div>
       </div>
     </div>
 
