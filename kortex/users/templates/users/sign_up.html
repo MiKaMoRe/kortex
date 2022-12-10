@@ -6,12 +6,15 @@
   Sign Up
 {% endblock title %}
 
+{% block link %}
+{% endblock link %}
+
 {% block content %}
-  <div class="row">
+  <div class="tile col-lg-8 col-xl-6">
     <form action="{% url 'sign_up' %}"
           method="post"
           autocomplete="off"
-          class="col-lg-6 ">
+          class="">
       <h1 class="modal-title fs-5" id="staticBackdropLabel">Registration</h1>
       {% csrf_token %}
 
@@ -59,7 +62,7 @@
         <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
         <label class="form-check-label" for="exampleCheck1">I agree to the Terms and Conditions</label>
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn">Submit</button>
     </form>
   </div>
 {% endblock content %}

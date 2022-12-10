@@ -6,8 +6,28 @@
   {{ profile.slug }}
 {% endblock title %}
 
+{% block link %}
+  <link rel="stylesheet" href="{% static "profiles/css/user.css" %}">
+{% endblock link %}
+
 {% block content %}
-  <div class="tile">
-    <div>{{ profile }}</div>
+  <div class="tile container">
+    <div class="row">
+      <div class="col-md-2">
+        <div class="profile-pic">
+          {% if profile.profile_picture %}
+            <img src="{{ profile.profile_picture.url }}" alt="">
+          {% else %}
+            <img src="{% static "profiles/images/no_photo.png" %}" alt="">
+          {% endif %}
+        </div>
+      </div>
+      <div class="col-md-6">
+        <h5>{{ profile.first_name }} {{ profile.last_name }}</h5>
+      </div>
+      <div class="col-md-4">
+        <a href="#" class="btn">Редактировать профиль</a>
+      </div>
+    </div>
   </div>
 {% endblock content %}

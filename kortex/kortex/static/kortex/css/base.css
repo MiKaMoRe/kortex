@@ -1,14 +1,15 @@
-:root {
+:root{
     --tile-background-color: #222222;
     --tile-border-color: #424242;
+    --btn-hover-color: #515151;
 }
 
-.bg-dark {
+.bg-dark{
     --bs-bg-opacity: 1;
     background-color: #141414 !important;
 }
 
-* {
+*{
     color: #fff;
 }
 
@@ -16,9 +17,18 @@
     list-style: none;
 }
 
-.tile {
+.tile{
     border-radius: 10px;
     padding: 10px;
     background-color: var(--tile-background-color);
     border: 1px solid var(--tile-border-color);
+}
+
+.btn{
+    color: #fff;
+    background-color: var(--tile-border-color);
+}
+
+.btn:hover{
+    background-color: var(--btn-hover-color);
 }

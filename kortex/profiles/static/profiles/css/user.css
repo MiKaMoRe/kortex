@@ -1,0 +1,11 @@
+.profile-pic {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+}
+
+.profile-pic img{
+    width: inherit;
+    height: inherit;
+}
+
