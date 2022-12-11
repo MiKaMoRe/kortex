@@ -22,8 +22,9 @@ from profiles.views import Profile
 urlpatterns = [
     path('__debug__/', include('debug_toolbar.urls')),
     path('admin/', admin.site.urls),
-    path("logout/", LogoutView.as_view(), name="logout"),
-    path("sign_up/", SignUp.as_view(), name="sign_up"),
+    path("logout", LogoutView.as_view(), name="logout"),
+    path("sign_up", SignUp.as_view(), name="sign_up"),
     path("", SignIn.as_view(), name="sign_in"),
     path("<slug:slug>", Profile.as_view(), name="profile"),
+    path("chats/", include("chats.urls")),
 ]

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+  Chats
+{% endblock title %}
+
+{% block link %}
+{% endblock link %}
+
+{% block content %}
+    <div class="tile">
+        {% for chat in chats %}
+            {{ chat.members.all }}
+        {% endfor %}
+    </div>
+{% endblock content %}
