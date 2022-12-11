@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "users.apps.UsersConfig",
     "profiles.apps.ProfilesConfig",
     "chats.apps.ChatsConfig",
+    "seeder.apps.SeederConfig",
     "debug_toolbar",
 ]
 
