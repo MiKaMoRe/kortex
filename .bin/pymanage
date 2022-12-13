@@ -6,4 +6,4 @@ do
     arguments+=("${var}")
 done
 
-python3 ./kortex/manage.py ${arguments[@]}
+python3 $VIRTUAL_ENV/../kortex/manage.py ${arguments[@]}
