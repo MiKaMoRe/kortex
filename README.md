@@ -5,7 +5,7 @@
 - Create a `.env` file by example `.env_example`
 - Setup virtual enviroment
     - Create python virtual enviroment by command: `python3 -m venv venv`
-    - Move all scripts in `.bin` directory to `/venv/bin`
+    - Move all scripts from `.bin` directory to `/venv/bin`
     - Execute `source venv/bin/activate`
 
 Now u can use `pymanage {command}` command instead `python3 manage.py {command}`
