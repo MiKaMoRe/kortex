@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+  Chat
+{% endblock title %}
+
+{% block link %}
+  <link rel="stylesheet" href="{% static "chats/css/chat_detail.css" %}">
+{% endblock link %}
+
+{% block script %}
+  <script src="{% static "chats/js/send_message.js" %}"></script>
+  <script src="{% static "chats/js/scroll_messages.js" %}"></script>
+{% endblock script %}
+
+{% block content %}
+  <div class="tile">
+    <div class="row d-none" id="message-example">
+      <div class="content">
+        <div class="message">
+          <a class="name"></a>:
+          <div class="text"></div>
+        </div>
+      </div>
+    </div>
+    <div class="tile-body" id="message-list">
+
+      {% for message in messages %}
+        <div class="row">
+          <div class="content">
+            <div class="message">
+              <a class="name" href="{% url "profile" message.author.slug %}">
+                {{ message.author.first_name }}
+                {{ message.author.last_name }}
+              </a>:
+              <div class="text">{{ message.text }}</div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+
+    </div>
+    <div class="input-panel tile-bright">
+      <form action="{% url "send_message" chat.pk %}"
+            method="post"
+            autocomplete="off"
+            id="send_message"
+            class="d-flex">
+        {% csrf_token %}
+        {{ form.text }}
+        {{ form.text.errors }}
+        <button type="submit" class="btn">Send</button>
+      </form>
+    </div>
+  </div>
+{% endblock content %}

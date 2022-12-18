@@ -11,36 +11,38 @@
 
 {% block content %}
   <div class="tile col-lg-8 col-xl-6">
-    <form action="{% url 'sign_in' %}"
-          method="post"
-          autocomplete="off"
-          class="col-md-12">
-      <h1 class="modal-title fs-5" id="staticBackdropLabel">Login</h1>
-      {% csrf_token %}
-
-      {% for error in form.non_field.errors %}{{ error }}{% endfor %}
-
-      {{ form.non_field_errors }}
-      <div class="mb-3">
-        <label for="{{ form.username.id_for_label }}" class="form-label">Email</label>
-        <div class="align-middle">
-          {{ form.username }}
-          {{ form.username.errors }}
+    <div class="tile-body">
+      <form action="{% url "sign_in" %}"
+            method="post"
+            autocomplete="off"
+            class="col-md-12">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Login</h1>
+        {% csrf_token %}
+  
+        {% for error in form.non_field.errors %}{{ error }}{% endfor %}
+  
+        {{ form.non_field_errors }}
+        <div class="mb-3">
+          <label for="{{ form.username.id_for_label }}" class="form-label">Email</label>
+          <div class="align-middle">
+            {{ form.username }}
+            {{ form.username.errors }}
+          </div>
         </div>
-      </div>
-      <div class="mb-3">
-        <label for="{{ form.password.id_for_label }}" class="form-label">Password</label>
-        <div class="align-middle">
-          {{ form.password }}
-          {{ form.password.errors }}
+        <div class="mb-3">
+          <label for="{{ form.password.id_for_label }}" class="form-label">Password</label>
+          <div class="align-middle">
+            {{ form.password }}
+            {{ form.password.errors }}
+          </div>
         </div>
-      </div>
-      <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
-        <label class="form-check-label" for="exampleCheck1">I agree to the Terms and Conditions</label>
-      </div>
-      <input type="hidden" name="next" value="{{ request.GET.next }}" />
-      <button type="submit" class="btn">Submit</button>
-    </form>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+          <label class="form-check-label" for="exampleCheck1">I agree to the Terms and Conditions</label>
+        </div>
+        <input type="hidden" name="next" value="{{ request.GET.next }}" />
+        <button type="submit" class="btn">Submit</button>
+      </form>
+    </div>
   </div>
 {% endblock content %}

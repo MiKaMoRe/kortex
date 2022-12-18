@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 from users.seeds import seed_users, User
-from chats.seeds import seed_chats, ChatFactory
+from chats.seeds import seed_chats, seed_messages, ChatFactory
 
 
 class Command(BaseCommand):
@@ -17,5 +17,9 @@ class Command(BaseCommand):
         )
         admin.save()
 
-        admins_chat = ChatFactory.create(members=(users[0], admin))
+        for user in users:
+            chats.append(ChatFactory.create(members=(user, admin)))
+        
+        for chat in chats:
+            seed_messages(chat)
 

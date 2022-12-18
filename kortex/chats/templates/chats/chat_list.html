@@ -11,8 +11,15 @@
 
 {% block content %}
     <div class="tile">
-        {% for chat in chats %}
-            {{ chat.members.all }}
-        {% endfor %}
+        <div class="tile-body">
+            {% for chat in chats %}
+                <div class="row">
+                    <div class="content">
+                        {{ chat.members.all }}
+                        <a href="{% url "chat_detail" chat.pk %}" class="btn">Открыть чат</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock content %}

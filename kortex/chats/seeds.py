@@ -1,6 +1,6 @@
 import random
 from chats.models import Chat
-from chats.factories import ChatFactory
+from chats.factories import ChatFactory, MessageFactory
 
 
 def seed_chats(users: list):
@@ -14,3 +14,15 @@ def seed_chats(users: list):
     print("Chats created")
 
     return chats
+
+
+def seed_messages(chat: Chat):
+    messages = []
+
+    for _ in range(random.randint(10, 20)):
+        user = random.choice(chat.members.all())
+        messages.append(MessageFactory.create(author=user, chat=chat))
+
+    print("Messages appended to {} chat".format(chat.pk))
+
+    return messages
