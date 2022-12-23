@@ -13,6 +13,14 @@
     padding: 10px 0;
 }
 
+.message .name{
+    padding-right: 10px;
+}
+
+.message-header{
+    display: flex;
+}
+
 @media (max-height: 720px) {
     #message-list{
         max-height: 70vh;

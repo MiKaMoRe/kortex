@@ -2,6 +2,8 @@
 
 {% load static %}
 
+{% load message_extras %}
+
 {% block title %}
   Chat
 {% endblock title %}
@@ -11,6 +13,7 @@
 {% endblock link %}
 
 {% block script %}
+  <script src="{% static "chats/js/message.js" %}"></script>
   <script src="{% static "chats/js/send_message.js" %}"></script>
   <script src="{% static "chats/js/scroll_messages.js" %}"></script>
 {% endblock script %}
@@ -20,21 +23,29 @@
     <div class="row d-none" id="message-example">
       <div class="content">
         <div class="message">
-          <a class="name"></a>:
+          <div class="message-header">
+            <a class="name"></a>
+            <div class="time"></div>
+          </div>
           <div class="text"></div>
         </div>
       </div>
     </div>
     <div class="tile-body" id="message-list">
 
-      {% for message in messages %}
-        <div class="row">
+      {% for message in messages|reverse %}
+        <div class="row infinite-item">
           <div class="content">
             <div class="message">
-              <a class="name" href="{% url "profile" message.author.slug %}">
-                {{ message.author.first_name }}
-                {{ message.author.last_name }}
-              </a>:
+              <div class="message-header">
+                <a class="name" href="{% url "profile" message.author.slug %}">
+                  {{ message.author.first_name }}
+                  {{ message.author.last_name }}
+                </a>
+                <div class="time">
+                  {{ message.created_at|date:"G:i" }}
+                </div>
+              </div>
               <div class="text">{{ message.text }}</div>
             </div>
           </div>

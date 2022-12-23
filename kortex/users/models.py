@@ -72,6 +72,14 @@ class User(AbstractUser):
             self.slug = f"id{id}"
         return super().save(*args, **kwargs)
 
+    def serialize(self):
+        return {
+            "email": self.email,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "slug": self.slug,
+        }
+
     class Meta:
         verbose_name = "user"
         verbose_name_plural = "users"

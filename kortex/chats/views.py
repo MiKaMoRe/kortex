@@ -2,6 +2,7 @@ from django.views.generic import ListView, DetailView, CreateView
 from django.shortcuts import get_object_or_404
 from chats.models import Chat, Message
 from chats.forms import SendMessageForm
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from users.models import User
 from kortex.utils import HasPemissionsMixin, JSONResponseMixin
 
@@ -27,16 +28,8 @@ class SendMessage(HasPemissionsMixin, JSONResponseMixin, CreateView):
         self.object.chat = chat
         self.object.save()
 
-        return self.render_to_response(
-            {
-                "success": True,
-                "message": {
-                    "text": self.object.text,
-                    "author_slug": self.object.author.slug,
-                    "author_first_name": self.object.author.first_name,
-                    "author_last_name": self.object.author.last_name,
-                },
-            },
+        return self.render_to_json_response(
+            {"message": self.object.serialize()},
             status=201,
         )
 
@@ -57,7 +50,7 @@ class ListChat(HasPemissionsMixin, ListView):
         return self.request.user.chats.all().prefetch_related("members")
 
 
-class DetailChat(HasPemissionsMixin, DetailView):
+class DetailChat(HasPemissionsMixin, JSONResponseMixin, DetailView):
     model = Chat
     context_object_name = "chat"
     login_url = "sign_in"
@@ -67,11 +60,28 @@ class DetailChat(HasPemissionsMixin, DetailView):
         Overridden to set ``self.object`` in ``has_permissions``
         """
         context = self.get_context_data(object=self.object)
+
+        if request.content_type == "application/json":
+            return self.render_to_json_response(context, status=200)
         return self.render_to_response(context)
+
+    def get_data(self, context):
+        messages = [message.serialize() for message in context["messages"]]
+        return {"messages": messages}
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["messages"] = self.object.messages.all()
+        messages = self.object.messages.all().prefetch_related("author")
+        paginator = Paginator(messages, 12)
+        page_number = self.request.GET.get("page")
+
+        try:
+            context["messages"] = paginator.page(page_number)
+        except EmptyPage:
+            context["messages"] = []
+        except PageNotAnInteger:
+            context["messages"] = paginator.page(1)
+        
         context["form"] = SendMessageForm(initial={"post": self.object})
         return context
 

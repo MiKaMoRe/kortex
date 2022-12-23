@@ -7,6 +7,8 @@ class Chat(models.Model):
 
 
 class Message(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     author = models.ForeignKey(
         User, verbose_name="author", on_delete=models.CASCADE, related_name="messages"
     )
@@ -14,3 +16,13 @@ class Message(models.Model):
         Chat, verbose_name="chat", on_delete=models.CASCADE, related_name="messages"
     )
     text = models.TextField(verbose_name="text")
+
+    def serialize(self):
+        return {
+            "text": self.text,
+            "created_at": self.created_at,
+            "author": self.author.serialize()
+        }
+
+    class Meta:
+        ordering = ["-pk"]
