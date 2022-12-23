@@ -33,6 +33,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "channels",
+    "daphne",
+    "debug_toolbar",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -43,7 +46,6 @@ INSTALLED_APPS = [
     "profiles.apps.ProfilesConfig",
     "chats.apps.ChatsConfig",
     "seeder.apps.SeederConfig",
-    "debug_toolbar",
 ]
 
 MIDDLEWARE = [
@@ -77,6 +79,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "kortex.wsgi.application"
 
+ASGI_APPLICATION = "kortex.asgi.application"
+
+CHANNEL_LAYERS = {"default": {"BACKEND": "channels.layers.InMemoryChannelLayer"}}
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
