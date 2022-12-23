@@ -1,5 +1,14 @@
 # This is social network KORTEX
 
+## Description
+This is my education project. At this moment we are able to:
+- Sign in and sign up
+- Open pages:
+    - Profile
+    - Chats list
+    - Chats detail with messages
+- Chatting with other users
+
 ## Setup
 
 - Create a `.env` file by example `.env_example`
@@ -10,9 +19,6 @@
 
 Now u can use `pymanage {command}` command instead `python3 manage.py {command}`
 - Install requirements by command: `pip install -r requirements.txt`
-
-## Description
-This is my education project. At this moment we are able to sign in and sign up
 
 ## Possible errors
 ### Ubuntu 22.04
