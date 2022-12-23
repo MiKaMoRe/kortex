@@ -1,4 +1,4 @@
-# This is social network KORTEX
+# Social network KORTEX
 
 ## Description
 This is my education project. At this moment we are able to:
