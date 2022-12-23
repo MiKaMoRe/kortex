@@ -1,5 +1,4 @@
 import random
-from users.models import User
 from users.factories import UserFactory
 
 

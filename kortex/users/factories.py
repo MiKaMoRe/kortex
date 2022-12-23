@@ -1,6 +1,6 @@
 from users.models import User
 from factory.django import DjangoModelFactory
-from factory import Faker
+from factory import Faker, PostGenerationMethodCall
 
 
 class UserFactory(DjangoModelFactory):
@@ -10,4 +10,4 @@ class UserFactory(DjangoModelFactory):
     email = Faker("email")
     first_name = Faker("first_name")
     last_name = Faker("last_name")
-    password = "simplepass"
+    password = PostGenerationMethodCall('set_password', 'simplepass')

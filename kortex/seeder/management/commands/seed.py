@@ -1,5 +1,6 @@
 from django.core.management.base import BaseCommand
-from users.seeds import seed_users, User
+from users.seeds import seed_users
+from users.models import User
 from chats.seeds import seed_chats, seed_messages, ChatFactory
 
 
