@@ -23,4 +23,3 @@ class Command(BaseCommand):
         
         for chat in chats:
             seed_messages(chat)
-

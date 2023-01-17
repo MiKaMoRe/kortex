@@ -40,7 +40,7 @@ class SendMessage(HasPemissionsMixin, JSONResponseMixin, CreateView):
 class ListChat(HasPemissionsMixin, ListView):
     model = Chat
     context_object_name = "chats"
-    paginate_by = 5
+    paginate_by = 15
     login_url = "sign_in"
 
     def has_permissions(self, user: User) -> bool:
