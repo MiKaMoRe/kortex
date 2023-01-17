@@ -1,8 +1,8 @@
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import ListView, DetailView, CreateView
 from django.shortcuts import get_object_or_404
 from chats.models import Chat, Message
 from chats.forms import SendMessageForm
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from users.models import User
 from kortex.utils import HasPemissionsMixin, JSONResponseMixin
 
@@ -40,7 +40,7 @@ class SendMessage(HasPemissionsMixin, JSONResponseMixin, CreateView):
 class ListChat(HasPemissionsMixin, ListView):
     model = Chat
     context_object_name = "chats"
-    paginate_by = 10
+    paginate_by = 5
     login_url = "sign_in"
 
     def has_permissions(self, user: User) -> bool:
@@ -48,6 +48,15 @@ class ListChat(HasPemissionsMixin, ListView):
 
     def get_queryset(self):
         return self.request.user.chats.all().prefetch_related("members")
+
+    def get_context_data(self, **kwargs):
+        current_user = self.request.user
+        context = super().get_context_data(**kwargs)
+
+        for chat in context["chats"]:
+            chat.set_interlocutor(current_user)
+
+        return context
 
 
 class DetailChat(HasPemissionsMixin, JSONResponseMixin, DetailView):
@@ -81,7 +90,7 @@ class DetailChat(HasPemissionsMixin, JSONResponseMixin, DetailView):
             context["messages"] = []
         except PageNotAnInteger:
             context["messages"] = paginator.page(1)
-        
+
         context["form"] = SendMessageForm(initial={"post": self.object})
         return context
 

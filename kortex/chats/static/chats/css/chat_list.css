@@ -1,0 +1,30 @@
+hr {
+    margin: 0;
+}
+
+.chat{
+    padding: 10px 10px;
+}
+
+.chat a {
+    display: flex;
+}
+
+.profile-pic {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+}
+
+.profile-pic img {
+    width: inherit;
+    height: inherit;
+}
+
+.chat:hover {
+    background-color: #333333;
+}
+
+.chat__body {
+    padding-left: 10px;
+}

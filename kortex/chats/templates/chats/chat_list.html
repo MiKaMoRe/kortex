@@ -7,19 +7,52 @@
 {% endblock title %}
 
 {% block link %}
+  <link rel="stylesheet" href="{% static "chats/css/chat_list.css" %}">
 {% endblock link %}
 
+{% block script %}
+  <script src="{% static 'kortex/js/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'kortex/js/infinite.min.js' %}"></script>
+  <script src="{% static "chats/js/pagination_chats.js" %}"></script>
+{% endblock script %}
+
 {% block content %}
-    <div class="tile">
-        <div class="tile-body">
-            {% for chat in chats %}
-                <div class="row">
-                    <div class="content">
-                        {{ chat.members.all }}
-                        <a href="{% url "chat_detail" chat.pk %}" class="btn">Открыть чат</a>
-                    </div>
+  <div class="tile">
+    <div class="tile-body">
+      <div class="infinite-container">
+
+        {% for chat in chats %}
+          <div class="infinite-item row">
+            <hr>
+            <div class="chat">
+              <a href="{% url "chat_detail" chat.pk %}">
+                <div class="profile-pic">
+
+                  {% if chat.interlocuter.profile_picture %}
+                    <img src="{{ chat.interlocutor.profile_picture.url }}" alt="">
+                  {% else %}
+                    <img src="{% static "profiles/images/no_photo.png" %}" alt="">
+                  {% endif %}
+
                 </div>
-            {% endfor %}
-        </div>
+                <div class="chat__body">
+                  <div class="chat__author">
+                    {{ chat.interlocutor.first_name }}
+                    {{ chat.interlocutor.last_name }}
+                  </div>
+                  <div class="chat__last-message" rel="chat{{ chat.id }}"></div>
+                </div>
+              </a>
+            </div>
+          </div>
+        {% endfor %}
+
+      </div>
+
+      {% if page_obj.has_next %}
+        <a class="infinite-more-link d-none"
+           href="?page={{ page_obj.next_page_number }}">Next</a>
+      {% endif %}
     </div>
+  </div>
 {% endblock content %}

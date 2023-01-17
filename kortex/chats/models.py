@@ -5,6 +5,14 @@ from users.models import User
 class Chat(models.Model):
     members = models.ManyToManyField(User, verbose_name="members", related_name="chats")
 
+    def set_interlocutor(self, current_user):
+        for user in self.members.all():
+            if user.pk is not current_user.pk:
+                self.interlocutor = user
+
+    class Meta:
+        ordering = ["-pk"]
+
 
 class Message(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -21,7 +29,7 @@ class Message(models.Model):
         return {
             "text": self.text,
             "created_at": self.created_at,
-            "author": self.author.serialize()
+            "author": self.author.serialize(),
         }
 
     class Meta:
