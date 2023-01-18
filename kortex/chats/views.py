@@ -75,6 +75,9 @@ class DetailChat(HasPemissionsMixin, JSONResponseMixin, DetailView):
         return self.render_to_response(context)
 
     def get_data(self, context):
+        """
+        JSON serialize
+        """
         messages = [message.serialize() for message in context["messages"]]
         return {"messages": messages}
 
@@ -95,6 +98,9 @@ class DetailChat(HasPemissionsMixin, JSONResponseMixin, DetailView):
         return context
 
     def has_permissions(self, user: User) -> bool:
+        """
+        Only chat members are allowed to open this chat
+        """
         if user.is_authenticated:
             self.object = self.get_object()
             chat = self.get_context_data().get("chat")
