@@ -10,10 +10,6 @@ from kortex.utils import HasPemissionsMixin, JSONResponseMixin
 class SendMessage(HasPemissionsMixin, JSONResponseMixin, CreateView):
     model = Message
     form_class = SendMessageForm
-    login_url = "sign_in"
-
-    def has_permissions(self, user: User) -> bool:
-        return user.is_authenticated
 
     def render_to_response(self, context, **response_kwargs):
         return self.render_to_json_response(context, **response_kwargs)
@@ -41,10 +37,6 @@ class ListChat(HasPemissionsMixin, ListView):
     model = Chat
     context_object_name = "chats"
     paginate_by = 15
-    login_url = "sign_in"
-
-    def has_permissions(self, user: User) -> bool:
-        return user.is_authenticated
 
     def get_queryset(self):
         return self.request.user.chats.all().prefetch_related("members")
@@ -62,7 +54,6 @@ class ListChat(HasPemissionsMixin, ListView):
 class DetailChat(HasPemissionsMixin, JSONResponseMixin, DetailView):
     model = Chat
     context_object_name = "chat"
-    login_url = "sign_in"
 
     def get(self, request, *args, **kwargs):
         """
@@ -101,9 +92,7 @@ class DetailChat(HasPemissionsMixin, JSONResponseMixin, DetailView):
         """
         Only chat members are allowed to open this chat
         """
-        if user.is_authenticated:
-            self.object = self.get_object()
-            chat = self.get_context_data().get("chat")
-            chat_members_ids = chat.members.values_list("pk", flat=True)
-            return user.pk in chat_members_ids
-        return False
+        self.object = self.get_object()
+        chat = self.get_context_data().get("chat")
+        chat_members_ids = chat.members.values_list("pk", flat=True)
+        return user.pk in chat_members_ids

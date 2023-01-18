@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.views.generic import View
 from django.http import Http404
 from users.models import User
-from django.core.exceptions import ObjectDoesNotExist
 
 class Profile(View):
     def get(self, request, slug):

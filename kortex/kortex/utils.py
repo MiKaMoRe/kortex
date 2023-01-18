@@ -4,6 +4,8 @@ from users.models import User
 
 
 class HasPemissionsMixin(AccessMixin):
+    login_url = "sign_in"
+
     def has_permissions(self, user: User) -> bool:
         """
         Override this method to add custom permissions
@@ -11,7 +13,7 @@ class HasPemissionsMixin(AccessMixin):
         return True
 
     def dispatch(self, request, *args, **kwargs):
-        if self.has_permissions(request.user):
+        if self.has_permissions(request.user) and request.user.is_authenticated:
             return super().dispatch(request, *args, **kwargs)
         return self.handle_no_permission()
 
